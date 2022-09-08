@@ -11,6 +11,7 @@ import 'package:image_size_getter/image_size_getter.dart' as iz;
 import 'package:mask_for_camera_view/mask_for_camera_view.dart';
 import 'package:mask_for_camera_view/mask_for_camera_view_camera_description.dart';
 import 'package:mask_for_camera_view/mask_for_camera_view_result.dart';
+import 'package:path_provider/path_provider.dart';
 
 // export 'package:ha_vin_scanner/src/vin_detector_view.dart';
 
@@ -35,9 +36,11 @@ class HAVINScanner {
                   onTake: (MaskForCameraViewResult res) async {
                     final TextRecognizer _textRecognizer = TextRecognizer();
 
+                    Directory tempDir = await getTemporaryDirectory();
+
                     String? filePath = await _saveImage(
                         res.croppedImage!,
-                        Directory.systemTemp,
+                        tempDir,
                         'temp_${DateTime.now().microsecondsSinceEpoch}.png');
 
                     InputImage inputImage =
