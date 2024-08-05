@@ -1,6 +1,6 @@
 name: ha_vin_scanner
 description: VIN Scan library.
-version: 0.0.5
+version: 0.0.6
 
 
 environment:

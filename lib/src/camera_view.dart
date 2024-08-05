@@ -363,7 +363,7 @@ class _CameraViewState extends State<CameraView> {
       size: imageSize,
       rotation: imageRotation,
       format: inputImageFormat,
-      bytesPerRow: planeData[0]?.bytesPerRow,
+      bytesPerRow: planeData[0]?.bytesPerRow ?? 0,
     );
 
     final inputImage =

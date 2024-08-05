@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Text(
                 '$vinNo',
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
             SizedBox(
