@@ -74,13 +74,14 @@ class _HAVINScannerViewState extends State<HAVINScannerView> {
         .takeWhile((block) => block.text.contains(regExp))
         .toList();
 
-    if (inputImage.inputImageData?.size != null &&
-        inputImage.inputImageData?.imageRotation != null &&
+      
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null &&
         textBlocks.isNotEmpty) {
       final painter = TextRecognizerPainter(
           RecognizedText(text: "", blocks: textBlocks),
-          inputImage.inputImageData!.size,
-          inputImage.inputImageData!.imageRotation);
+          inputImage.metadata!.size,
+          inputImage.metadata!.rotation);
       _customPaint = CustomPaint(painter: painter);
       widget.vinDetected(textBlocks.map((e) => e.text).join(";"));
       Navigator.pop(context);

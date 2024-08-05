@@ -342,25 +342,33 @@ class _CameraViewState extends State<CameraView> {
         InputImageFormatValue.fromRawValue(image.format.raw);
     if (inputImageFormat == null) return;
     print("image inputformate:$inputImageFormat");
+
     final planeData = image.planes.map(
       (Plane plane) {
-        return InputImagePlaneMetadata(
-          bytesPerRow: plane.bytesPerRow,
-          height: plane.height,
-          width: plane.width,
-        );
+        InputImageMetadata(
+            bytesPerRow: plane.bytesPerRow,
+            size: Size(plane.width?.toDouble() ?? 0.0,
+                plane.height?.toDouble() ?? 0.0),
+            format: inputImageFormat,
+            rotation: imageRotation);
+        // return InputImagePlaneMetadata(
+        //   bytesPerRow: plane.bytesPerRow,
+        //   height: plane.height,
+        //   width: plane.width,
+        // );
       },
     ).toList();
 
-    final inputImageData = InputImageData(
+    final inputImageData = InputImageMetadata(
       size: imageSize,
-      imageRotation: imageRotation,
-      inputImageFormat: inputImageFormat,
-      planeData: planeData,
+      rotation: imageRotation,
+      format: inputImageFormat,
+      bytesPerRow: planeData[0]?.bytesPerRow,
     );
 
     final inputImage =
-        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+        InputImage.fromBytes(bytes: bytes, metadata: inputImageData);
+    // InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
     inputImage.bytes;
     widget.onImage(inputImage);
   }
