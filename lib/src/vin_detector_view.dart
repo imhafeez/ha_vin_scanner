@@ -6,7 +6,7 @@ import 'camera_view.dart';
 
 class HAVINScannerView extends StatefulWidget {
   final Function(String) vinDetected;
-  const HAVINScannerView({required this.vinDetected});
+  const HAVINScannerView({super.key, required this.vinDetected});
 
   show(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: ((context) => this)));

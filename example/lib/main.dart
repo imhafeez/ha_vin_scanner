@@ -48,22 +48,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 'scanned vin no:',
               ),
               Text(
-                '$vinNo',
+                vinNo,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             CheckboxListTile(
-                title: Text("Auto Scan"),
+                title: const Text("Auto Scan"),
                 value: auto,
                 onChanged: (value) {
                   setState(() {
                     auto = (value ?? false);
                   });
                 }),
-            SizedBox(
+            const SizedBox(
               height: 80,
             )
           ],

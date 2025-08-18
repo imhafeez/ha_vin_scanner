@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 enum ScreenMode { liveFeed, gallery }
 
 class CameraView extends StatefulWidget {
-  CameraView(
+  const CameraView(
       {Key? key,
       required this.title,
       required this.customPaint,
@@ -89,7 +89,7 @@ class _CameraViewState extends State<CameraView> {
         actions: [
           if (_allowPicker)
             Padding(
-              padding: EdgeInsets.only(right: 20.0),
+              padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: _switchScreenMode,
                 child: Icon(
@@ -116,13 +116,13 @@ class _CameraViewState extends State<CameraView> {
         height: 70.0,
         width: 70.0,
         child: FloatingActionButton(
+          onPressed: _switchLiveCamera,
           child: Icon(
             Platform.isIOS
                 ? Icons.flip_camera_ios_outlined
                 : Icons.flip_camera_android_outlined,
             size: 40,
           ),
-          onPressed: _switchLiveCamera,
         ));
   }
 
@@ -160,8 +160,8 @@ class _CameraViewState extends State<CameraView> {
             scale: scale,
             child: Center(
               child: _changingCameraLens
-                  ? Center(
-                      child: const Text('Changing camera lens'),
+                  ? const Center(
+                      child: Text('Changing camera lens'),
                     )
                   : CustomPaint(
                       foregroundPainter: Paint(),
@@ -175,7 +175,7 @@ class _CameraViewState extends State<CameraView> {
           // ),
           ClipPath(clipper: Clip(), child: CameraPreview(_controller!)),
           if (widget.customPaint != null) widget.customPaint!,
-          Positioned(
+          const Positioned(
               bottom: 100,
               left: 50,
               right: 50,
@@ -217,21 +217,21 @@ class _CameraViewState extends State<CameraView> {
                 ],
               ),
             )
-          : Icon(
+          : const Icon(
               Icons.image,
               size: 200,
             ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
-          child: Text('From Gallery'),
+          child: const Text('From Gallery'),
           onPressed: () => _getImage(ImageSource.gallery),
         ),
       ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
-          child: Text('Take a picture'),
+          child: const Text('Take a picture'),
           onPressed: () => _getImage(ImageSource.camera),
         ),
       ),
@@ -394,7 +394,7 @@ class Clip extends CustomClipper<Path> {
     Path path = Path()
       ..addRRect(RRect.fromRectAndRadius(
           Rect.fromLTWH(10, size.height / 2 - 120, size.width - 20, 260),
-          Radius.circular(26)));
+          const Radius.circular(26)));
     return path;
   }
 

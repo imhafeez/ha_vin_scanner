@@ -34,7 +34,7 @@ class HAVINScanner {
                   title: "VIN Scan",
                   visiblePopButton: true,
                   onTake: (MaskForCameraViewResult res) async {
-                    final TextRecognizer _textRecognizer = TextRecognizer();
+                    final TextRecognizer textRecognizer = TextRecognizer();
 
                     Directory tempDir = await getTemporaryDirectory();
 
@@ -47,7 +47,7 @@ class HAVINScanner {
                         InputImage.fromFile(File.fromUri(Uri.file(filePath!)));
 
                     RecognizedText recognizedText =
-                        await _textRecognizer.processImage(inputImage);
+                        await textRecognizer.processImage(inputImage);
 
                     RegExp regExp = RegExp("^[A-Z0-9]{17}\$");
                     List<TextBlock> textBlocks = recognizedText.blocks
@@ -68,7 +68,7 @@ class HAVINScanner {
                             .replaceAll("*", ""))
                         .join(";"));
                     Navigator.pop(context);
-                    _textRecognizer.close();
+                    textRecognizer.close();
                     // Image imageCropped =
                     //     Image.file(File.fromUri(Uri.file(filePath)));
                     // Navigator.of(context).push(
@@ -100,7 +100,7 @@ class HAVINScanner {
 
   Future<String?> _saveImage(
       Uint8List uint8List, Directory dir, String fileName,
-      {Function? success, Function? fail}) async {
+      {Function? success}) async {
     bool isDirExist = await Directory(dir.path).exists();
     if (!isDirExist) Directory(dir.path).create();
     String tempPath = '${dir.path}$fileName';
